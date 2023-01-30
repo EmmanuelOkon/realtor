@@ -27,7 +27,7 @@ export default function Header() {
         <div>
           <ul className="flex space-x-10 ">
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-y-transparent hover:border-b-red-500  transition-all  ${
+              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 hover:text-gray-600 border-b-[3px] border-y-transparent hover:border-b-red-500  transition-all  ${
                 pathMathRoute("/") && "border-b-red-500 text-black"
               }`}
               onClick={() => navigate("/")}
@@ -35,7 +35,7 @@ export default function Header() {
               Home
             </li>
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-y-transparent hover:border-b-red-500  transition-all ${
+              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 hover:text-gray-600 border-b-[3px] border-y-transparent hover:border-b-red-500  transition-all ${
                 pathMathRoute("/offers") && "border-b-red-500 text-black"
               }`}
               onClick={() => navigate("/offers")}
@@ -43,7 +43,7 @@ export default function Header() {
               Offers
             </li>
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-y-transparent hover:border-b-red-500  transition-all ${
+              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 hover:text-gray-600 border-b-[3px] border-y-transparent hover:border-b-red-500  transition-all ${
                 pathMathRoute("/signin") && "border-b-red-500 text-black"
               }`}
               onClick={() => navigate("/signin")}
