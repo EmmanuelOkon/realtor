@@ -3,6 +3,15 @@ import Locker from "../assets/locker.png";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { db } from "../utils/firebase";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -12,6 +21,7 @@ export default function SignUp() {
   });
 
   const { name, email, password } = formData;
+  const navigate = useNavigate()
   function onChange(e) {
     setFormData((prevState) => ({
       ...prevState,
@@ -19,11 +29,39 @@ export default function SignUp() {
     }));
   }
 
+  async function onSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
+      const user = userCredential.user;
+      const formDataCopy = { ...formData };
+      // delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+      toast.success("Sign up Successful")
+      navigate("/")
+    } catch (error) {
+      // console.log(error);
+      toast.error("Something is Wrong")
+    }
+  }
+
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <section>
-      <h1 className="text-3xl text-center mt-6 font-bold text-red-600 uppercase border-b-red-900 tracking-widest">
+      <h1 className="text-xl md:text-3xl text-center mt-6 font-bold text-red-600 uppercase md:tracking-widest">
         Create account
       </h1>
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto ">
@@ -31,9 +69,9 @@ export default function SignUp() {
           <img className="w-full" src={Locker} alt="locker" />
         </div>
         <div className="w-full md:w-[50%] bg-rd-700 py-6  lg:px-6 ">
-          <form className="w-full">
+          <form className="w-full" onSubmit={onSubmit}>
             <input
-              className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-[2px] border-grey-300 rounded-md outline-none ring-0 focus:ring-0 focus:outline-none transition ease-in-out mb-6"
+              className="w-full px-4 py-2 md:text-lg text-gray-700 bg-white border-[2px] border-grey-300 rounded-md outline-none ring-0 focus:ring-0 focus:outline-none transition ease-in-out mb-6"
               type="text"
               id="name"
               value={name}
@@ -41,7 +79,7 @@ export default function SignUp() {
               placeholder="Full name"
             />
             <input
-              className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-[2px] border-grey-300 rounded-md outline-none ring-0 focus:ring-0 focus:outline-none transition ease-in-out mb-6"
+              className="w-full px-4 py-2 md:text-lg text-gray-700 bg-white border-[2px] border-grey-300 rounded-md outline-none ring-0 focus:ring-0 focus:outline-none transition ease-in-out mb-6"
               type="email"
               id="email"
               value={email}
@@ -50,7 +88,7 @@ export default function SignUp() {
             />
             <div className="relative">
               <input
-                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-[2px] border-grey-300 rounded-md outline-none ring-0 focus:ring-0 focus:outline-none transition ease-in-out mb-6"
+                className="w-full px-4 py-2 md:text-lg text-gray-700 bg-white border-[2px] border-grey-300 rounded-md outline-none ring-0 focus:ring-0 focus:outline-none transition ease-in-out mb-6"
                 type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
@@ -59,34 +97,34 @@ export default function SignUp() {
               />
               {showPassword ? (
                 <AiFillEyeInvisible
-                  className="absolute right-4 top-[.8rem] text-2xl cursor-pointer"
+                  className="absolute right-4 top-[.6rem] text-2xl cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               ) : (
                 <AiFillEye
-                  className="absolute right-4 top-[.8rem] text-2xl cursor-pointer"
+                  className="absolute right-4 top-[.6rem] text-2xl cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               )}
             </div>
-            <div className="flex justify-between whitespace-nowrap text-sm lg:text-base font-normal md:font-medium">
-              <p className="mb-6">
+            <div className="mb-4 flex justify-between whitespace-nowrap text-sm lg:text-base font-normal md:font-medium">
+              <p className="">
                 Have an account?
                 <Link
                   to="/signin"
                   className="text-red-600 hover:text-red-700 transition duration-200 ease-in-out pl-1"
                 >
-                  Log In
+                  Sign In
                 </Link>
               </p>
-              <p>
+              {/* <p>
                 <Link
                   to="/forgotpassword"
                   className="text-sm lg:text-base text-green-600 hover:text-green-800 transition duration-200 ease-in-out"
                 >
                   Forgot password?
                 </Link>
-              </p>
+              </p> */}
             </div>
             <button
               className="w-full bg-red-600 text-white px-7 py-3 rounded-md font-medium text-sm transition duration-150 ease-in-out hover:bg-red-700 active:bg-red-900 uppercase shadow-xl"
