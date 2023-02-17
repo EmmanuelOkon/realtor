@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Locked from "../assets/signin.png";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({
@@ -20,15 +22,37 @@ export default function SignIn() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (userCredential.user) {
+        toast.success("Sign in successful")
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("Invalid credentials");
+    }
+  }
+
   return (
     <section>
-      <h1 className="text-xl md:text-3xl text-center mt-6 font-bold text-red-600 uppercase  md:tracking-widest">Log in</h1>
+      <h1 className="text-xl md:text-3xl text-center mt-6 font-bold text-red-600 uppercase  md:tracking-widest">
+        Log in
+      </h1>
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto ">
         <div className="w-full md:w-[50%] lg:w-[50%] ">
           <img className="w-full" src={Locked} alt="locker" />
         </div>
         <div className="w-full md:w-[50%] bg-rd-700 py-6  lg:px-6 ">
-          <form className="w-full">
+          <form className="w-full" onSubmit={onSubmit}>
             <input
               className="w-full px-4 py-2 md:text-lg text-gray-700 bg-white border-[2px] border-grey-300 rounded-md outline-none ring-0 focus:ring-0 focus:outline-none transition ease-in-out mb-6"
               type="email"
