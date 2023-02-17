@@ -97,12 +97,12 @@ export default function SignUp() {
               />
               {showPassword ? (
                 <AiFillEyeInvisible
-                  className="absolute right-4 top-[.6rem] text-2xl cursor-pointer"
+                  className="absolute right-4 top-[.6rem] md:top-[.8rem] text-2xl cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               ) : (
                 <AiFillEye
-                  className="absolute right-4 top-[.6rem] text-2xl cursor-pointer"
+                  className="absolute right-4 top-[.6rem] md:top-[.8rem] text-2xl cursor-pointer"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               )}
