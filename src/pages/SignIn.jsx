@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Locked from "../assets/signin.png";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
@@ -47,11 +47,11 @@ export default function SignIn() {
       <h1 className="text-xl md:text-3xl text-center mt-6 font-bold text-red-600 uppercase  md:tracking-widest">
         Log in
       </h1>
-      <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto ">
+      <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
         <div className="w-full md:w-[50%] lg:w-[50%] ">
           <img className="w-full" src={Locked} alt="locker" />
         </div>
-        <div className="w-full md:w-[50%] bg-rd-700 py-6  lg:px-6 ">
+        <div className="w-full md:w-[50%] bg-rd-700 py-6 lg:px-6">
           <form className="w-full" onSubmit={onSubmit}>
             <input
               className="w-full px-4 py-2 md:text-lg text-gray-700 bg-white border-[2px] border-grey-300 rounded-md outline-none ring-0 focus:ring-0 focus:outline-none transition ease-in-out mb-6"
@@ -83,7 +83,7 @@ export default function SignIn() {
               )}
             </div>
             <div className="mb-4 flex justify-between items-center whitespace-nowrap txt-sm lg:text-base font-normal md:font-medium">
-              <p className=" text-[13px] md:text-base ">
+              <p className="text-[13px] md:text-base">
                 Don't have an account?
                 <Link
                   to="/signup"
