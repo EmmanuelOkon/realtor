@@ -36,8 +36,12 @@ export default function Profile() {
         await updateDoc(docRef, {
           name,
         });
+        if (changeDetails === true) {
+          toast.success("Changes Updated");
+          window.location.reload();
+        }
       }
-      toast.success("Changes Updated")
+      
     } catch (error) {
       toast.error("Changes update failed");
     }
@@ -54,8 +58,8 @@ export default function Profile() {
         <h1 className="text-xl md:text-3xl text-center mt-6 font-semibold text-red-600 uppercase  md:tracking-wide">
           Welcome Back
           <span className="text-green-700 capitalie font-bold md:ml-2">
-          {/* {name} */}
-          {auth.currentUser.displayName}
+            {/* {name} */}
+            {auth.currentUser.displayName}
           </span>
         </h1>
         <div className="w-full md:w-[50%] px-3 py-6 lg:px-6 mx-auto">
