@@ -1,17 +1,31 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [pageState, setPageState] = useState("Sign In");
+  const auth = getAuth();
 
-  function pathMathRoute(route) {
+  useEffect(() => {
+    onAuthStateChanged(auth, (user)=>{
+      if(user){
+        setPageState("Profile")
+      } else {
+        setPageState("Sign In")
+      }
+    } )
+  }, [auth])
+
+
+  function pathMatchRoute(route) {
     if (route === location.pathname) {
       return true;
     }
   }
 
-  <style></style>;
+  // <style></style>;
 
   return (
     <div className="bg-white border-b shadow-sm sticky top-0 z-50">
@@ -28,7 +42,7 @@ export default function Header() {
           <ul className="flex space-x-10 ">
             <li
               className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 hover:text-gray-600 border-b-[3px] border-y-transparent hover:border-b-red-600  transition-all  ${
-                pathMathRoute("/") && "border-b-red-500 text-gray-900"
+                pathMatchRoute("/") && "border-b-red-500 text-gray-900"
               }`}
               onClick={() => navigate("/")}
             >
@@ -36,7 +50,7 @@ export default function Header() {
             </li>
             <li
               className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 hover:text-gray-600 border-b-[3px] border-y-transparent hover:border-b-red-600  transition-all ${
-                pathMathRoute("/offers") && "border-b-red-500 text-black"
+                pathMatchRoute("/offers") && "border-b-red-500 text-black"
               }`}
               onClick={() => navigate("/offers")}
             >
@@ -44,11 +58,12 @@ export default function Header() {
             </li>
             <li
               className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 hover:text-gray-600 border-b-[3px] border-y-transparent hover:border-b-red-600  transition-all ${
-                pathMathRoute("/signin") && "border-b-red-500 text-black"
+                (pathMatchRoute("/signin") || pathMatchRoute("/profile")) &&
+                "border-b-red-500 text-black"
               }`}
-              onClick={() => navigate("/signin")}
+              onClick={() => navigate("/profile")}
             >
-              Sign In
+              {pageState}
             </li>
           </ul>
         </div>
