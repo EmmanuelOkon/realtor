@@ -10,6 +10,13 @@ export default function Profile() {
   const navigate = useNavigate();
   const [changeDetails, setChangeDetails] = useState(false);
 
+  // function validateEmail(email) {
+  //   const re =
+  //     // eslint-disable-next-line no-useless-escape
+  //     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   return re.test(String(email).toLowerCase());
+  // }
+
   const [formData, setFormData] = useState({
     name: auth.currentUser.displayName,
     email: auth.currentUser.email,
@@ -25,6 +32,11 @@ export default function Profile() {
   }
 
   async function onSubmit() {
+    if (!name || name.trim() === "") {
+      toast.error("Please enter your name.");
+      return;
+    }
+
     try {
       if (auth.currentUser.displayName !== name) {
         // Update displayName in Firebase auth
@@ -37,11 +49,12 @@ export default function Profile() {
           name,
         });
         if (changeDetails === true) {
+          setTimeout(function () {
+            window.location.reload();
+          }, 5000);
           toast.success("Changes Updated");
-          window.location.reload();
         }
       }
-      
     } catch (error) {
       toast.error("Changes update failed");
     }
