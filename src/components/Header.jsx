@@ -9,15 +9,14 @@ export default function Header() {
   const auth = getAuth();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user)=>{
-      if(user){
-        setPageState("Profile")
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setPageState("Profile");
       } else {
-        setPageState("Sign In")
+        setPageState("Sign In");
       }
-    } )
-  }, [auth])
-
+    });
+  }, [auth]);
 
   function pathMatchRoute(route) {
     if (route === location.pathname) {
@@ -25,10 +24,8 @@ export default function Header() {
     }
   }
 
-  // <style></style>;
-
   return (
-    <div className="bg-white border-b shadow-sm sticky top-0 z-50">
+    <div className="bg-white border-b shadow-sm sticky top-0 z-30">
       <header className="flex justify-between items-center px-3 max-w-6xl mx-auto">
         <div>
           <img
