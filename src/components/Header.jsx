@@ -25,7 +25,7 @@ export default function Header() {
   }
 
   return (
-    <div className="bg-white border-b shadow-sm sticky top-0 z-30">
+    <div className="bg-white border-b border-b-red shadow-sm sticky top-0 z-30">
       <header className="flex justify-between items-center px-3 max-w-6xl mx-auto">
         <div>
           <img
@@ -36,27 +36,27 @@ export default function Header() {
           />
         </div>
         <div>
-          <ul className="flex space-x-10 ">
+          <ul className="flex space-x-10  ">
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 hover:text-gray-600 border-b-[3px] border-y-transparent hover:border-b-red-600  transition-all  ${
-                pathMatchRoute("/") && "border-b-red-500 text-gray-900"
+              className={`cursor-pointer py-3 text-sm font-semibold text-grey hover:text-red border-b-[3px] border-b-white hover:border-b-red  transition-all  ${
+                pathMatchRoute("/") && "border-b-red text-red font-bold"
               }`}
               onClick={() => navigate("/")}
             >
               Home
             </li>
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 hover:text-gray-600 border-b-[3px] border-y-transparent hover:border-b-red-600  transition-all ${
-                pathMatchRoute("/offers") && "border-b-red-500 text-black"
+              className={`cursor-pointer py-3 text-sm font-semibold text-grey hover:text-red border-b-[3px] border-b-white hover:border-b-red  transition-all ${
+                pathMatchRoute("/offers") && "border-b-red text-red font-bold"
               }`}
               onClick={() => navigate("/offers")}
             >
               Offers
             </li>
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 hover:text-gray-600 border-b-[3px] border-y-transparent hover:border-b-red-600  transition-all ${
+              className={`cursor-pointer py-3 text-sm font-semibold text-grey hover:text-red border-b-[3px] border-b-white hover:border-b-red  transition-all ${
                 (pathMatchRoute("/signin") || pathMatchRoute("/profile")) &&
-                "border-b-red-500 text-black"
+                "border-b-red text-red font-bold"
               }`}
               onClick={() => navigate("/profile")}
             >

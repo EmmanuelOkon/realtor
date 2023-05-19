@@ -34,7 +34,7 @@ export default function SignIn() {
         password
       );
       if (userCredential.user) {
-        toast.success("Sign in successful")
+        toast.success("Sign in successful");
         navigate("/");
       }
     } catch (error) {
@@ -44,7 +44,7 @@ export default function SignIn() {
 
   return (
     <section>
-      <h1 className="text-xl md:text-3xl text-center mt-6 font-bold text-red-600 uppercase  md:tracking-widest">
+      <h1 className="text-xl md:text-3xl text-center mt-6 font-bold text-red uppercase  md:tracking-widest">
         Log in
       </h1>
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-6xl mx-auto">
@@ -54,7 +54,7 @@ export default function SignIn() {
         <div className="w-full md:w-[50%] bg-rd-700 py-6 lg:px-6">
           <form className="w-full" onSubmit={onSubmit}>
             <input
-              className="w-full px-4 py-2 md:text-lg text-gray-700 bg-white border-[2px] border-grey-300 rounded-md outline-none ring-0 focus:ring-0 focus:outline-none transition ease-in-out mb-6"
+              className="w-full px-4 py-2 md:text-lg text-grey bg-white border-[2px] border-grey border-opacity-25 rounded-md outline-none focus:border-fadeGreen focus:ring-transparent transition ease-in-out mb-6"
               type="email"
               id="email"
               value={email}
@@ -63,7 +63,7 @@ export default function SignIn() {
             />
             <div className="relative">
               <input
-                className="w-full px-4 py-2 md:text-lg text-gray-700 bg-white border-[2px] border-grey-300 rounded-md outline-none ring-0 focus:ring-0 focus:outline-none transition ease-in-out mb-6"
+                className="w-full px-4 py-2 md:text-lg text-grey bg-white border-[2px] border-grey border-opacity-25 rounded-md outline-none focus:border-fadeGreen focus:ring-transparent transition ease-in-out mb-6"
                 type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
@@ -87,7 +87,7 @@ export default function SignIn() {
                 Don't have an account?
                 <Link
                   to="/signup"
-                  className="text-red-600 hover:text-red-700 transition duration-200 ease-in-out pl-1"
+                  className="text-red hover:text-opacity-90 transition duration-200 ease-in-out pl-1"
                 >
                   Sign Up
                 </Link>
@@ -95,20 +95,20 @@ export default function SignIn() {
               <p className="text-[13px] md:text-base">
                 <Link
                   to="/forgotpassword"
-                  className="text-sm lg:text-base text-green-600 hover:text-green-800 transition duration-200 ease-in-out"
+                  className="text-sm lg:text-base text-fadeGreen hover:text-deepGreen transition duration-200 ease-in-out"
                 >
                   Forgot password?
                 </Link>
               </p>
             </div>
             <button
-              className="w-full bg-red-600 text-white px-7 py-3 rounded-md font-medium text-sm transition duration-150 ease-in-out hover:bg-red-700 active:bg-red-900 uppercase shadow-xl"
+              className="w-full bg-red text-white px-7 py-3 rounded-md font-medium text-sm transition duration-150 ease-in-out hover:bg-opacity-90 active:bg-red-900 uppercase shadow-xl"
               type="submit"
             >
               Log In
             </button>
-            <div className="my-4 flex items-center before:border-t before:flex-1 before:border-gray-300 w-full after:border-t after:flex-1 after:border-gray-300">
-              <p className="uppercase text-center font-semibold mx-4">or</p>
+            <div className="my-4 flex items-center before:border-t before:flex-1 before:border-grey w-full after:border-t after:flex-1 after:border-grey before:border-opacity-30 after:border-opacity-30">
+              <p className="uppercase text-center font-semibold mx-4 ">or</p>
             </div>
             <OAuth />
           </form>
