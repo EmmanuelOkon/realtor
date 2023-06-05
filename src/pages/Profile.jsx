@@ -2,7 +2,8 @@ import { getAuth, updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
+import { toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { db } from "../utils/firebase";
 import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
@@ -19,6 +20,12 @@ export default function Profile() {
 
   const { name, email } = formData;
 
+  const position = "top-right";
+  const duration = 3000;
+  const others = {
+    closeButton: false,
+  };
+
   function onChange(e) {
     setFormData((prevState) => ({
       ...prevState,
@@ -28,7 +35,17 @@ export default function Profile() {
 
   async function onSubmit() {
     if (!name || name.trim() === "") {
-      toast.error("Please enter your name.");
+      toast.error("Please enter your name.", {
+        position,
+        autoClose: duration,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "light",
+        transition: Slide,
+        ...others,
+      });
       return;
     }
 
@@ -47,11 +64,31 @@ export default function Profile() {
           setTimeout(function () {
             window.location.reload();
           }, 5000);
-          toast.success("Changes Updated");
+          toast.success("Signed Out", {
+            position,
+            autoClose: duration,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            theme: "light",
+            transition: Slide,
+            ...others,
+          });
         }
       }
     } catch (error) {
-      toast.error("Changes update failed");
+      toast.error("Changes update failed", {
+        position,
+        autoClose: duration,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "light",
+        transition: Slide,
+        ...others,
+      });
     }
   }
 
@@ -113,13 +150,12 @@ export default function Profile() {
             </p>
           </div>
         </form>
-
         <button
           type="submit"
           className="w-full bg-deepGreen text-white uppercase px-7 py-3 text-sm font-medium rounded shadow-md hover:bg-opacity-90 transition duration-150 ease-in-out hover:shadow-lg active:bg-green-800"
         >
           <Link
-            to="/create-listing"
+            to="/createlisting"
             className="flex justify-center items-center"
           >
             <FcHome className="mr-2 text-3xl rounded-full p-1" />

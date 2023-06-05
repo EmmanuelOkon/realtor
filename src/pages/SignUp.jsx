@@ -11,7 +11,8 @@ import {
 import { db } from "../utils/firebase";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -21,13 +22,19 @@ export default function SignUp() {
   });
 
   const { name, email, password } = formData;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   function onChange(e) {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
   }
+
+  const position = "top-right";
+  const duration = 3000;
+  const others = {
+    closeButton: false,
+  };
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -49,11 +56,21 @@ export default function SignUp() {
       formDataCopy.timestamp = serverTimestamp();
 
       await setDoc(doc(db, "users", user.uid), formDataCopy);
-      toast.success("Sign up Successful")
-      navigate("/")
+      toast.success("Sign up Successful");
+      navigate("/");
     } catch (error) {
       // console.log(error);
-      toast.error("Something is Wrong")
+      toast.error("Something is Wrong", {
+        position,
+        autoClose: duration,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "light",
+        transition: Slide,
+        ...others,
+      });
     }
   }
 

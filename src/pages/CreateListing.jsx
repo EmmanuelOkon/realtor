@@ -121,7 +121,7 @@ export default function CreateListing() {
             onClick={onChange}
             className={`px-7 py-3 font-medium text-sm uppercase shadow-md rounded hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full border-2 border-fadeGreen ${
               !parking
-              ? "bg-fadeGreen bg-opacity-10 text-fadeGreen"
+                ? "bg-fadeGreen bg-opacity-10 text-fadeGreen"
                 : "bg-green-600 text-white"
             }`}
           >
@@ -225,7 +225,9 @@ export default function CreateListing() {
             no
           </button>
         </div>
-        <p className="text-lg font-semibold mt-6 mb-1 text-fadeGreen">Regular price</p>
+        <p className="text-lg font-semibold mt-6 mb-1 text-fadeGreen">
+          Regular price
+        </p>
         <div className="flex w-full gap-3 items-center ">
           <input
             type="number"
@@ -239,13 +241,17 @@ export default function CreateListing() {
           />
           {type === "rent" && (
             <div className="w-full">
-              <p className="text-md md:text-lg whitespace-nowrap text-grey">$ / Month</p>
+              <p className="text-md md:text-lg whitespace-nowrap text-grey">
+                $ / Month
+              </p>
             </div>
           )}
         </div>
         {offer && (
           <div>
-            <p className="text-lg font-semibold mt-6 mb-1 text-fadeGreen">Discounted price</p>
+            <p className="text-lg font-semibold mt-6 mb-1 text-fadeGreen">
+              Discounted price
+            </p>
             <div className="flex w-full gap-3 items-center ">
               <input
                 type="number"
@@ -259,7 +265,9 @@ export default function CreateListing() {
               />
               {type === "rent" && (
                 <div className="w-full">
-                  <p className="text-md md:text-lg whitespace-nowrap text-grey">$ / Month</p>
+                  <p className="text-md md:text-lg whitespace-nowrap text-grey">
+                    $ / Month
+                  </p>
                 </div>
               )}
             </div>
@@ -267,9 +275,7 @@ export default function CreateListing() {
         )}
         <div className="mb-6">
           <p className="text-lg font-semibold text-fadeGreen">Images</p>
-          <p className="text-grey">
-            The first image will be the cover (max 6)
-          </p>
+          <p className="text-grey">The first image will be the cover (max 6)</p>
           <input
             type="file"
             id="images"
@@ -277,7 +283,7 @@ export default function CreateListing() {
             accept=".jpg,.png,.jpeg"
             multiple
             required
-            className="w-full px-3 py-1.5 text-grey outline-transparent ring-transparent active:outline-fadeGreen bg-white border-2 border-grey border-opacity-25 rounded transition duration-150 ease-in-out focus:bg-white focus:border-fadeGreen focus:ring-transparent active:ring-transparent"
+            className="w-full rsize-none p-2 text-xl text-grey bg-white border-2 border-grey border-opacity-25 rounded transition duration-150 ease-in-out focus:text-grey focus:border-fadeGreen ring-transparent focus:ring-transparent outline-transparent focus:outline-none"
           />
         </div>
         <button

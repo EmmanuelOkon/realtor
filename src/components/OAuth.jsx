@@ -3,11 +3,17 @@ import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
+import { toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { db } from "../utils/firebase";
 
 export default function OAuth() {
   const navigate = useNavigate();
+  const position = "top-right";
+  const duration = 3000;
+  const others = {
+    closeButton: false,
+  };
   async function onGoogleClick() {
     try {
       const auth = getAuth();
@@ -26,9 +32,19 @@ export default function OAuth() {
           timeStamp: serverTimestamp(),
         });
       }
-      navigate("/")
+      navigate("/");
     } catch (error) {
-      toast.error("Google authentication failed");
+      toast.error("Google authentication failed", {
+        position,
+        autoClose: duration,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "light",
+        transition: Slide,
+        ...others,
+      });
     }
   }
 

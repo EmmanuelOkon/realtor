@@ -35,35 +35,35 @@ export default function Header() {
             onClick={() => navigate("/")}
           />
         </div>
-        <div>
-          <ul className="flex space-x-10  ">
-            <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-grey hover:text-red border-b-[3px] border-b-white hover:border-b-red  transition-all  ${
-                pathMatchRoute("/") && "border-b-red text-red font-bold"
-              }`}
-              onClick={() => navigate("/")}
-            >
-              Home
-            </li>
-            <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-grey hover:text-red border-b-[3px] border-b-white hover:border-b-red  transition-all ${
-                pathMatchRoute("/offers") && "border-b-red text-red font-bold"
-              }`}
-              onClick={() => navigate("/offers")}
-            >
-              Offers
-            </li>
-            <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-grey hover:text-red border-b-[3px] border-b-white hover:border-b-red  transition-all ${
-                (pathMatchRoute("/signin") || pathMatchRoute("/profile")) &&
-                "border-b-red text-red font-bold"
-              }`}
-              onClick={() => navigate("/profile")}
-            >
-              {pageState}
-            </li>
-          </ul>
-        </div>
+        <ul className="flex space-x-10  ">
+          <li
+            className={`cursor-pointer py-3 text-sm font-semibold text-grey hover:text-red border-b-[3px] border-b-white hover:border-b-red  transition-all  ${
+              pathMatchRoute("/") &&
+              "border-b-[#BF212F] text-red font-bold border-b-[3px]"
+            }`}
+            onClick={() => navigate("/")}
+          >
+            Home
+          </li>
+          <li
+            className={`cursor-pointer py-3 text-sm font-semibold text-grey hover:text-red border-b-[3px] border-b-white hover:border-b-red  transition-all ${
+              pathMatchRoute("/offers") &&
+              "border-b-[#BF212F] text-red font-bold"
+            }`}
+            onClick={() => navigate("/offers")}
+          >
+            Offers
+          </li>
+          <li
+            className={`cursor-pointer py-3 text-sm font-semibold text-grey hover:text-red border-b-[3px] border-b-white hover:border-b-red  transition-all ${
+              (pathMatchRoute("/signin") || pathMatchRoute("/profile")) &&
+              "border-b-[#BF212F] text-red font-bold"
+            }`}
+            onClick={() => navigate("/profile")}
+          >
+            {pageState}
+          </li>
+        </ul>
       </header>
     </div>
   );

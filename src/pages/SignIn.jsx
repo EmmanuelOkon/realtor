@@ -4,7 +4,8 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
-import { toast } from "react-toastify";
+import { toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,12 @@ export default function SignIn() {
       [e.target.id]: e.target.value,
     }));
   }
+
+  const position = "top-right";
+  const duration = 3000;
+  const others = {
+    closeButton: false,
+  };
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -38,7 +45,17 @@ export default function SignIn() {
         navigate("/");
       }
     } catch (error) {
-      toast.error("Invalid credentials");
+      toast.error("Invalid credentials", {
+        position,
+        autoClose: duration,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "light",
+        transition: Slide,
+        ...others,
+      });
     }
   }
 
